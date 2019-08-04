@@ -75,5 +75,5 @@ export function onReady(callback) {
     return;
   }
 
-  cb();
+  callback();
 }
