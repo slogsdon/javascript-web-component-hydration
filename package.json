@@ -1,0 +1,9 @@
+{
+  "name": "web-component-hydration",
+  "version": "1.0.0",
+  "description": "Thin wrapper around HTMLElement to support hydration of server-side rendered custom elements",
+  "module": "index.js",
+  "repository": "https://github.com/slogsdon/javascript-web-component-hydration",
+  "author": "Shane Logsdon <shane@shanelogsdon.com>",
+  "license": "MIT"
+}
