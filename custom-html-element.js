@@ -8,9 +8,6 @@ import { hydrate } from "./helpers.js";
  * element's name prefixed with `template-`, e.g. `template-my-custom-element`.
  */
 export class CustomHTMLElement extends HTMLElement {
-  /** @type {string[]} */
-  knownCustomElements = [];
-
   /**
    * Custom element's name
    * @type {string | undefined}
@@ -51,6 +48,9 @@ export class CustomHTMLElement extends HTMLElement {
       // @ts-ignore
       this.template = document.getElementById(`template-${this.constructor.is}`);
       this.attachShadow({ mode: 'open' });
+
+      /** @type {string[]} */
+      this.knownCustomElements = [];
   }
 
   connectedCallback() {
