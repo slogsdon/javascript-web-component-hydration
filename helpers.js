@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Hydrates server-side rendered custom elements / web components.
  *
