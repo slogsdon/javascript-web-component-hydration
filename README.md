@@ -81,7 +81,7 @@ This `data-template` attribute matches the `template` via `id="template-x-list"`
 Using named slots in the custom element's template requires a couple of small changes when compared to the single unnamed slot:
 
 - Slots should be named, and named slots should not be mixed with unnamed slots. These should match browser specs
-- `data-initial-data` should be JSON-encoded key/value pairs for each of the named slots
+- `data-initial-data` should be URL-encoded JSON, representing key/value pairs for each of the named slots
 
 As an example:
 
@@ -97,7 +97,7 @@ As an example:
 Rendered HTML with data `content`:
 
 ```html
-<div data-template="x-list-item" data-initial-data="{\"label\":\"content\",\"foo\":\"bar\"}">
+<div data-template="x-list-item" data-initial-data="%7B%22label%22%3A%22content%22%2C%22foo%22%3A%22bar%22%7D">
   <li>
     <slot name="label">content</slot>
     <slot name="foo">bar</slot>

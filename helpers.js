@@ -1,4 +1,5 @@
 // @ts-check
+
 /**
  * Hydrates server-side rendered custom elements / web components.
  *
@@ -46,8 +47,15 @@ export function hydrate(name, slotElementType) {
  * @param {HTMLElement} newChild Newly created element
  */
 function hydrateInitialData(initialData, slotElementType, newChild) {
+  const decodedString = decodeURI(initialData)
+    // additional replacements for PHP's `urlencode`
+    .replace(/%3[dD]/g, '=')
+    .replace(/\+/g, ' ')
+    .replace(/%2[fF]/g, '/')
+    .replace(/%3[aA]/g, ':')
+    .replace(/%2[cC]/g, ',');
   try {
-    const data = JSON.parse(initialData);
+    const data = JSON.parse(decodedString);
     Object.keys(data).forEach((key) => {
       const el = document.createElement(slotElementType || 'span');
       el.slot = key;
@@ -56,11 +64,7 @@ function hydrateInitialData(initialData, slotElementType, newChild) {
     });
   } catch (e) {
     // one, unnamed slot
-    newChild.innerHTML = decodeURI(initialData)
-      // additional replacements for PHP's `urlencode`
-      .replace(/%3[dD]/g, '=')
-      .replace(/\+/g, ' ')
-      .replace(/%2[fF]/g, '/');
+    newChild.innerHTML = decodedString;
   }
 }
 
