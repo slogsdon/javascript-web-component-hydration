@@ -15,11 +15,11 @@ export class CustomHTMLElement extends HTMLElement {
   static get is() { return undefined; }
 
   /**
-   * Ensure's custom elements are only defined once per page load and pass along
+   * Ensures custom elements are only defined once per page load and pass along
    * the promise created with `customElements.whenDefined`.
    *
-   * When custom elements are not available for the current browser, a rejected
-   * promise is returned.
+   * A rejected promise is returned when the custom element's name is not defined
+   * via `is` or when custom elements are not available for the current browser.
    */
   static async register() {
     if (this.is === undefined) {
@@ -53,6 +53,11 @@ export class CustomHTMLElement extends HTMLElement {
       this.knownCustomElements = [];
   }
 
+  /**
+   * When extending `CustomHTMLElement` and defining your own `connectedCallback`,
+   * be sure to call `super.connectedCallback()`  to support hydration of child
+   * elements in both the regular and shadow DOMs.
+   */
   connectedCallback() {
     if (!this.shadowRoot || !this.isConnected || !this.template) {
       return;
